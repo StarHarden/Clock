@@ -1,5 +1,5 @@
 html {
-  background: #018DED url(https://paintings.pinotspalette.com/colorful-love-tv.jpg?v=10026315);
+  background-image:url(./TreeOfLife.jpg);
   background-size: cover;
   font-family: 'helvetica neue';
   text-align: center;
@@ -43,7 +43,7 @@ body {
   height: 100%;
   text-align: center;
   transform: rotate(var(--rotation));
-  position: absolute;  
+  position: absolute;
 
 }
 
@@ -69,5 +69,5 @@ body {
   transform-origin: 100%;
   transform: rotate(90deg);
   /*transition: all 0.5s; this fixed my minhand glitch */
-  transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1); 
+  transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
 }

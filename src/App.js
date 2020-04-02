@@ -1,36 +1,45 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './App.css';
 
-//const secondHand = document.querySelector('.second-hand');
-//const minsHand = document.querySelector('.min-hand');
-//const hourHand = document.querySelector('.hour-hand');
-
-
 function App() {
-  
-    function setDate() {
-const now = new Date();
 
-const seconds = now.getSeconds();
-const secondsDegrees = ((seconds / 60) * 360) + 90;
-secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+  const secondHand = useRef (null);
+  const minsHand = useRef (null);
+  const hourHand = useRef (null);
 
-const mins = now.getMinutess();
-const minsDegrees = ((mins / 60) * 360) + 90;
-minsHand.style.transform = `rotate(${minsDegrees}deg)`
+  function setDate() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsDegrees = ((seconds / 60) * 360) + 90;
 
-const hour = now.getMinutes();
-const hoursDegrees = ((mins / 12) * 360) + 90;
-hourHand.style.transform = `rotate(${minsDegrees}deg)`
-}
-setInterval(setDate, 1000);
-return (
+    if (secondHand.current !== null) {
+      secondHand.current.style.backgroundColor =
+      `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`
+      secondHand.current.style.transform = `rotate(${secondsDegrees}deg)`
+    }
+
+    const mins = now.getMinutes();
+    const minsDegrees = ((mins / 60) * 360) + 90;
+
+    if (minsHand.current !== null) {
+      minsHand.current.style.transform = `rotate(${minsDegrees}deg)`
+    }
+
+    const hoursDegrees = ((mins / 12) * 360) + 90;
+
+    if (hourHand.current !== null) {
+      hourHand.current.style.transform = `rotate(${hoursDegrees}deg)`
+    }
+  }
+  setInterval(setDate, 1000);
+
+  return (
       <>
-          <div class="clock">
-            <div class="clock-face">
-              <div class="hand hour-hand"></div>
-              <div class="hand min-hand"></div>
-              <div class="hand second-hand"></div>
+          <div className="clock">
+            <div className="clock-face">
+              <div ref={hourHand} class="hand hour-hand"></div>
+              <div ref={minsHand} class="hand min-hand"></div>
+              <div ref={secondHand} class="hand second-hand"></div>
               <div class="number number1">1</div>
               <div class="number number2">2</div>
               <div class="number number3">3</div>
@@ -45,7 +54,7 @@ return (
               <div class="number number12">12</div>
             </div>
           </div>
-        
+
       </>
   );
 }
